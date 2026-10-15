@@ -1,0 +1,1014 @@
+/* ==========================================================================
+   1. IMPORTACIÓN DE FUENTES Y CONFIGURACIÓN BASE
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary-color: #28a745;
+    --primary-neon: #39ff14;
+    --primary-glow: rgba(57, 255, 20, 0.35);
+    --bg-black: #080808;
+    --bg-dark: #111111;
+    --bg-card: #1a1a1a;
+    --bg-card-hover: #222222;
+    --text-white: #ffffff;
+    --text-gray: #a0a0a0;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(57, 255, 20, 0.3);
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. CLASES DE UTILIDAD
+   ========================================================================== */
+.highlight { 
+    color: var(--primary-neon); 
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+.text-center { text-align: center; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 2rem; }
+.mt-3 { margin-top: 1rem; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.align-center { align-items: center; }
+
+/* ==========================================================================
+   3. BOTONES MODERNOS CON EFECTO NEÓN
+   ========================================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-neon));
+    color: #000;
+    box-shadow: 0 4px 20px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 30px rgba(57, 255, 20, 0.6);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-white);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary-neon);
+    color: var(--primary-neon);
+    box-shadow: 0 0 15px var(--primary-glow);
+    transform: translateY(-3px);
+}
+
+.btn-lg {
+    padding: 1rem 2.2rem;
+    font-size: 0.95rem;
+}
+
+.btn-full {
+    width: 100%;
+    text-align: center;
+}
+
+/* ==========================================================================
+   4. ENCABEZADO Y MENÚ FLOTANTE CON CRISTAL
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+    background: rgba(8, 8, 8, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.Logo img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 2.2rem;
+}
+
+.menu li a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    letter-spacing: 1.2px;
+    position: relative;
+    padding: 0.3rem 0;
+    transition: color 0.3s ease;
+}
+
+.menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-neon);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px var(--primary-neon);
+}
+
+.menu li a:hover, .menu li a.active {
+    color: var(--primary-neon);
+}
+
+.menu li a:hover::after, .menu li a.active::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ==========================================================================
+   5. SECCIÓN PARALLAX HERO
+   ========================================================================== */
+.parallax {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(circle at center, #1a2a1a 0%, var(--bg-black) 70%);
+}
+
+.parallax img {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    pointer-events: none;
+    transition: transform 0.1s linear;
+}
+
+.titulo {
+    position: absolute;
+    top: 32%;
+    right: 8%;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: var(--text-white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.9);
+    z-index: 10;
+}
+
+.hero-content {
+    position: absolute;
+    top: 52%;
+    z-index: 20;
+    text-align: center;
+    max-width: 750px;
+    padding: 0 1.5rem;
+}
+
+.hero-tag {
+    color: var(--primary-neon);
+    font-weight: 800;
+    letter-spacing: 4px;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   6. BARRA DE DATOS RÁPIDOS (STATS)
+   ========================================================================== */
+.quick-stats {
+    background-color: var(--bg-dark);
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-accent);
+}
+
+.stat-item i {
+    font-size: 2.2rem;
+    color: var(--primary-neon);
+}
+
+.stat-item h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.stat-item p {
+    color: var(--text-gray);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   7. SECCIONES Y CONTENIDOS
+   ========================================================================== */
+.section {
+    padding: 7rem 0;
+}
+
+.section-dark { background-color: var(--bg-dark); }
+.section-black { background-color: var(--bg-black); }
+
+.section-title {
+    text-align: center;
+    margin-bottom: 4.5rem;
+}
+
+.section-title span {
+    color: var(--primary-neon);
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.section-title h2 {
+    font-size: 2.6rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   8. NOSOTROS & EQUIPO
+   ========================================================================== */
+.rounded-img {
+    width: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.shadow-neon {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(40, 167, 69, 0.15);
+}
+
+.about-image-wrapper { position: relative; }
+
+.badge-floating {
+    position: absolute;
+    bottom: -15px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-neon));
+    color: #000;
+    padding: 0.8rem 1.4rem;
+    font-weight: 800;
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.mission-vision {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2rem 0;
+}
+
+.mv-box {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary-neon);
+}
+
+.mv-box h4 {
+    color: var(--primary-neon);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.values-list ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.values-list li {
+    margin-bottom: 0.8rem;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.values-list i {
+    color: var(--primary-neon);
+}
+
+/* CARDS DE EQUIPO */
+.team-section { margin-top: 6rem; }
+
+.card {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary-glow);
+}
+
+.team-card .card-img {
+    height: 280px;
+    overflow: hidden;
+}
+
+.team-card .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.team-card:hover .card-img img {
+    transform: scale(1.08);
+}
+
+.team-card .card-body { padding: 1.8rem; }
+
+.team-card .role {
+    color: var(--primary-neon);
+    font-size: 0.82rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+}
+
+/* BANNER PARALLAX INTERMEDIO */
+.parallax-banner {
+    position: relative;
+    padding: 9rem 2rem;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(8, 8, 8, 0.85);
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.banner-content h2 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--primary-neon);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.banner-content p {
+    font-size: 1.15rem;
+    color: var(--text-white);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+/* ==========================================================================
+   9. SERVICIOS Y TARIFAS
+   ========================================================================== */
+.service-card {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.service-icon {
+    font-size: 3.2rem;
+    color: var(--primary-neon);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+.service-card h3 { 
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.service-card p { 
+    color: var(--text-gray); 
+    margin-bottom: 1.8rem; 
+    font-size: 0.92rem;
+}
+
+.link-btn {
+    color: var(--primary-neon);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.link-btn:hover {
+    gap: 0.8rem;
+}
+
+/* TARJETAS DE PRECIOS */
+.pricing-grid {
+    align-items: center;
+}
+
+.pricing-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    position: relative;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.pricing-card.featured {
+    border-color: var(--primary-neon);
+    background: linear-gradient(180deg, rgba(40, 167, 69, 0.08) 0%, var(--bg-card) 100%);
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -14px;
+    right: 25px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-neon));
+    color: #000;
+    padding: 0.3rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pricing-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.8rem;
+    margin-bottom: 1.8rem;
+    text-align: center;
+}
+
+.pricing-header h4 { 
+    font-size: 1.4rem; 
+    text-transform: uppercase;
+}
+
+.price {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: var(--primary-neon);
+    margin-top: 0.6rem;
+}
+
+.price span {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.pricing-features {
+    list-style: none;
+    margin-bottom: 2.5rem;
+}
+
+.pricing-features li {
+    margin-bottom: 0.9rem;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.pricing-features li i {
+    color: var(--primary-neon);
+}
+
+.pricing-features li.disabled { 
+    opacity: 0.35; 
+}
+
+.pricing-features li.disabled i { 
+    color: #ff4d4d; 
+}
+
+/* ==========================================================================
+   10. TIENDA DE PRODUCTOS Y POLÍTICAS
+   ========================================================================== */
+.product-card { 
+    position: relative; 
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(8, 8, 8, 0.85);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--primary-neon);
+    color: var(--primary-neon);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: 50px;
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+.product-img {
+    height: 240px;
+    overflow: hidden;
+    background: #000;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.08);
+}
+
+.product-info { padding: 1.8rem; }
+
+.product-info h4 {
+    font-size: 1.1rem;
+}
+
+.product-desc {
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    margin: 0.6rem 0 1.2rem;
+    font-weight: 300;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.tax-info {
+    font-size: 0.72rem;
+    color: var(--text-gray);
+}
+
+.product-variants {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.variant-tag {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.variant-tag.active, .variant-tag:hover {
+    border-color: var(--primary-neon);
+    color: var(--primary-neon);
+    background: rgba(57, 255, 20, 0.05);
+}
+
+.shipping-policy-box {
+    margin-top: 4rem;
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.policy-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.policy-item i {
+    font-size: 2.2rem;
+    color: var(--primary-neon);
+}
+
+.policy-item h5 {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.policy-item p {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+}
+
+/* ==========================================================================
+   11. TESTIMONIOS Y CONTACTO
+   ========================================================================== */
+.testimonial-card { padding: 2.2rem; }
+.stars { color: #ffc107; margin-bottom: 1rem; letter-spacing: 2px; }
+
+.testimonial-card p {
+    font-size: 0.92rem;
+    color: var(--text-gray);
+    font-style: italic;
+}
+
+.user-info {
+    margin-top: 1.8rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.user-info strong { display: block; font-size: 0.95rem; }
+.user-info span { font-size: 0.8rem; color: var(--primary-neon); }
+
+/* FORMULARIO DE CONTACTO */
+.contact-form-wrapper {
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.contact-form .form-group { margin-bottom: 1.5rem; }
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary-neon);
+    outline: none;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.form-privacy {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    margin-bottom: 1.8rem;
+}
+
+.form-privacy a { color: var(--primary-neon); text-decoration: none; }
+
+.info-card {
+    background: var(--bg-card);
+    padding: 1.8rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateX(5px);
+    border-color: var(--border-accent);
+}
+
+.info-card i {
+    font-size: 2.2rem;
+    color: var(--primary-neon);
+}
+
+.info-card h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+}
+
+.info-card p {
+    font-size: 0.88rem;
+    color: var(--text-gray);
+}
+
+/* ==========================================================================
+   12. PIE DE PÁGINA (FOOTER)
+   ========================================================================== */
+.footer {
+    background-color: #040404;
+    padding: 5rem 0 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.footer-logo {
+    height: 45px;
+    margin-bottom: 1.2rem;
+}
+
+.footer-col p {
+    color: var(--text-gray);
+    font-size: 0.88rem;
+}
+
+.footer-col h4 {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.6rem;
+    font-size: 1.05rem;
+}
+
+.footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 35px;
+    height: 2px;
+    background: var(--primary-neon);
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 0.8rem; }
+
+.footer-links a {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover { 
+    color: var(--primary-neon); 
+    padding-left: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--primary-neon);
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 0.82rem;
+}
+
+/* ==========================================================================
+   13. VENTANA MODAL (PRODUCTOS)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 20px;
+    max-width: 460px;
+    width: 90%;
+    position: relative;
+    border: 1px solid var(--border-accent);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--primary-glow);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--primary-neon);
+}
+
+.modal-body { text-align: center; }
+
+.modal-body img {
+    max-height: 200px;
+    object-fit: contain;
+    margin-bottom: 1.2rem;
+    border-radius: 8px;
+}
+
+.modal-details h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+}
+
+/* ==========================================================================
+   14. ADAPTABILIDAD MOBILE (RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 992px) {
+    header { padding: 1rem 2rem; }
+    .titulo { font-size: 3.2rem; right: 5%; }
+    .pricing-card.featured { transform: none; }
+}
+
+@media (max-width: 768px) {
+    header { padding: 1rem 1.5rem; }
+    .menu, .header-actions { display: none; }
+    .titulo { font-size: 2.3rem; top: 30%; right: 0; left: 0; text-align: center; }
+    .hero-content { top: 50%; }
+    .section { padding: 4.5rem 0; }
+    .shipping-policy-box, .mission-vision { grid-template-columns: 1fr; }
+    .contact-form-wrapper { padding: 1.8rem; }
+}
